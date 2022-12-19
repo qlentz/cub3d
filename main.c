@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:12:56 by qlentz            #+#    #+#             */
-/*   Updated: 2022/12/12 16:03:03 by qlentz           ###   ########.fr       */
+/*   Updated: 2022/12/19 21:11:32 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	main(void)
 	player.worldMap = copyarray(worldMap);
 	double time = 0.0;
 	double oldTime = 0.0;
-	
 	t_mlx		mlx;
 	t_img		img;
 
@@ -93,7 +92,6 @@ int	main(void)
 	reset(encode_rgb(121, 210, 227), encode_rgb(0, 0, 0), mlx.img);
 	raycast(&player);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img->img, 0, 0);
-	//mlx_key_hook(mlx.win, hook_keydown, &player);
 	mlx_hook(mlx.win, 2, (1L<<0), hook_keydown, &player);
 	mlx_loop(mlx.mlx);
 	return (0);

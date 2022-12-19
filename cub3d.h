@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:07:57 by qlentz            #+#    #+#             */
-/*   Updated: 2022/12/11 18:58:21 by qlentz           ###   ########.fr       */
+/*   Updated: 2022/12/19 21:14:45 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ typedef struct s_vector {
 	double	y;
 }				t_vector;
 
+typedef struct s_ivector {
+	int	x;
+	int y;
+}				t_ivector;
+
 typedef struct s_player {
 	t_vector	pos;
 	t_vector	dir;
@@ -55,11 +60,25 @@ typedef struct s_player {
 	t_mlx		*mlx;
 }				t_player;
 
+typedef struct s_ray {
+	t_vector	rayDir;
+	t_vector	sideDist;
+	t_vector	deltaDist;
+	t_ivector	map;
+	t_vector	step;
+	double 		camerax;
+	int			hit;
+	int			side;
+	t_ivector	draw;
+	double 		perpWallDist;
+}				t_ray;
+
 void	pixel_put(t_img *data, int x, int y, int color);
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 void	close_win(t_mlx *mlx);
-void	verLine(t_mlx *mlx, int x, int start, int end, int color);
+void	ver_line(t_mlx *mlx, int x, t_ivector coordinates, int color);
 void	reset(int sky, int floor, t_img *img);
 void	raycast(t_player *player);
 int		hook_keydown(int key, t_player *player);
+
 #endif
