@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:22:45 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/28 22:57:48 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/29 00:22:27 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	parse_colors(t_params *p)
 	char	**arr;
 	int		i;
 
-	arr = ft_split(p->paramsarr[find_tex("F", p)][1], ',');
+	arr = ft_split(p->pa[find_tex("F", p)][1], ',');
 	i = 1;
 	if (arr)
 	{
@@ -47,7 +47,7 @@ int	parse_colors(t_params *p)
 	}
 	else
 		i = 0;
-	arr = ft_split(p->paramsarr[find_tex("C", p)][1], ',');
+	arr = ft_split(p->pa[find_tex("C", p)][1], ',');
 	if (arr)
 	{
 		if (!bind_colors(p, arr, 1))
@@ -91,18 +91,23 @@ void	set_params(t_player *pl, t_texes *t, t_params *p)
 	t->c.r = p->colors[1].r;
 	t->c.g = p->colors[1].g;
 	t->c.b = p->colors[1].b;
-	remove_nl(p->paramsarr[find_tex("SO", p)][1]);
-	remove_nl(p->paramsarr[find_tex("NO", p)][1]);
-	remove_nl(p->paramsarr[find_tex("EA", p)][1]);
-	remove_nl(p->paramsarr[find_tex("WE", p)][1]);
-	pl->texture[0].img_ptr = mlx_xpm_file_to_image(pl->mlx->mlx, p->paramsarr[find_tex("SO", p)][1], &pl->texture[0].width, &pl->texture[0].height);
-    pl->texture[0].addr = mlx_get_img_addr(pl->texture[0].img_ptr, &pl->texture[0].bpp, &pl->texture[0].line_len, &pl->texture[0].endian);
-    pl->texture[1].img_ptr = mlx_xpm_file_to_image(pl->mlx->mlx, p->paramsarr[find_tex("WE", p)][1], &pl->texture[1].width, &pl->texture[1].height);
-    pl->texture[1].addr = mlx_get_img_addr(pl->texture[1].img_ptr, &pl->texture[1].bpp, &pl->texture[1].line_len, &pl->texture[1].endian);
-	pl->texture[2].img_ptr = mlx_xpm_file_to_image(pl->mlx->mlx, p->paramsarr[find_tex("NO", p)][1], &pl->texture[2].width, &pl->texture[2].height);
-    pl->texture[2].addr = mlx_get_img_addr(pl->texture[2].img_ptr, &pl->texture[2].bpp, &pl->texture[2].line_len, &pl->texture[2].endian);
-	pl->texture[3].img_ptr = mlx_xpm_file_to_image(pl->mlx->mlx, p->paramsarr[find_tex("EA", p)][1], &pl->texture[3].width, &pl->texture[3].height);
-    pl->texture[3].addr = mlx_get_img_addr(pl->texture[3].img_ptr, &pl->texture[3].bpp, &pl->texture[3].line_len, &pl->texture[3].endian);
+	remove_nl(p);
+	pl->tex[0].img_ptr = mlx_xpm_file_to_image(pl->mlx->mlx,
+			p->pa[find_tex("SO", p)][1], &pl->tex[0].width, &pl->tex[0].height);
+	pl->tex[0].addr = mlx_get_img_addr(pl->tex[0].img_ptr,
+			&pl->tex[0].bpp, &pl->tex[0].line_len, &pl->tex[0].endian);
+	pl->tex[1].img_ptr = mlx_xpm_file_to_image(pl->mlx->mlx,
+			p->pa[find_tex("WE", p)][1], &pl->tex[1].width, &pl->tex[1].height);
+	pl->tex[1].addr = mlx_get_img_addr(pl->tex[1].img_ptr,
+			&pl->tex[1].bpp, &pl->tex[1].line_len, &pl->tex[1].endian);
+	pl->tex[2].img_ptr = mlx_xpm_file_to_image(pl->mlx->mlx,
+			p->pa[find_tex("NO", p)][1], &pl->tex[2].width, &pl->tex[2].height);
+	pl->tex[2].addr = mlx_get_img_addr(pl->tex[2].img_ptr,
+			&pl->tex[2].bpp, &pl->tex[2].line_len, &pl->tex[2].endian);
+	pl->tex[3].img_ptr = mlx_xpm_file_to_image(pl->mlx->mlx,
+			p->pa[find_tex("EA", p)][1], &pl->tex[3].width, &pl->tex[3].height);
+	pl->tex[3].addr = mlx_get_img_addr(pl->tex[3].img_ptr,
+			&pl->tex[3].bpp, &pl->tex[3].line_len, &pl->tex[3].endian);
 }
 
 int	find_tex(char *t, t_params *p)
@@ -112,7 +117,7 @@ int	find_tex(char *t, t_params *p)
 	i = 0;
 	while (i < 6)
 	{
-		if (ft_strcmp(t, p->paramsarr[i][0]) == 0)
+		if (ft_strcmp(t, p->pa[i][0]) == 0)
 			return (i);
 		i++;
 	}

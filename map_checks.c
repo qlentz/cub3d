@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 03:34:27 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/28 22:57:54 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/29 00:20:49 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,10 @@ void	set_dir(t_player *player, t_params *p)
 	}
 }
 
-void	remove_nl(char *str)
+void	remove_nl(t_params *p)
 {
-	*(ft_strchr(str, '\n')) = 0;
+	*(ft_strchr(p->pa[find_tex("SO", p)][1], '\n')) = 0;
+	*(ft_strchr(p->pa[find_tex("NO", p)][1], '\n')) = 0;
+	*(ft_strchr(p->pa[find_tex("EA", p)][1], '\n')) = 0;
+	*(ft_strchr(p->pa[find_tex("WE", p)][1], '\n')) = 0;
 }

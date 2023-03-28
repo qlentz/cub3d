@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:15:43 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/26 22:38:57 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/29 00:04:18 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int tex_map(t_params *p)
 	tab[4] = "F";
 	tab[5] = "C";
 
-	while (p->paramsarr[j])
+	while (p->pa[j])
 	{
 		i = 0;
 		while (i < 6)
 		{
-			if (ft_strcmp(p->paramsarr[j][0], tab[i]) == 0)
+			if (ft_strcmp(p->pa[j][0], tab[i]) == 0)
 			{
 				tab[i] = ".";
 				i = 10;
@@ -55,7 +55,7 @@ t_params *init_params(void)
 	p = (t_params *)malloc(sizeof(t_params));
 	while (i < 6)
 	{
-		p->paramsarr[i] = NULL;
+		p->pa[i] = NULL;
 		i++;
 	}
 	return (p);	
@@ -69,8 +69,8 @@ int	free_param(t_params *p)
 	i = 0;
 	while (i < 6)
 	{
-		if (p->paramsarr[i])
-			ft_free_tab(p->paramsarr[i]);
+		if (p->pa[i])
+			ft_free_tab(p->pa[i]);
 		i++;
 	}
 	while (p->lst)
@@ -96,7 +96,7 @@ int	read_params(int fd, t_params *p)
 		if (line == NULL)
 			return (0);
 		if (line[0] != '\n')
-			p->paramsarr[i++] = ft_split(line, ' ');
+			p->pa[i++] = ft_split(line, ' ');
 		free(line);
 	}
 	if (!tex_map(p))

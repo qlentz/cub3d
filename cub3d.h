@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:07:57 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/28 22:36:34 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/29 00:20:44 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_color {
 }				t_color;
 
 typedef struct s_params {
-	char 	**paramsarr[6];
+	char 	**pa[6];
 	t_color	colors[2];
 	t_list	*lst;
 	char	dir;
@@ -109,7 +109,7 @@ typedef struct s_player {
 	int			**worldMap;
 	t_texes		texes;
 	t_mlx		*mlx;
-	t_texture	texture[4];
+	t_texture	tex[4];
 }				t_player;
 
 typedef struct s_ray {
@@ -127,7 +127,7 @@ typedef struct s_ray {
 
 
 /* draw_walls.c */
-int		get_pixel_color(t_texture *texture, int x, int y);
+int		get_pixel_color(t_texture *tex, int x, int y);
 void	draw_wall_line(t_player *player, t_ray *ray, int x, t_textpixel *tex);
 void	draw_wall(t_player *player, t_ray *ray, int x, int line_height);
 
@@ -138,7 +138,7 @@ void	ver_line(t_mlx *mlx, int x, t_ivector coordinates, int color);
 void	reset(int sky, int floor, t_img *img);
 void	raycast(t_player *player);
 int		hook_keydown(int key, t_player *player);
-int get_pixel_color(t_texture *texture, int x, int y);
+int get_pixel_color(t_texture *tex, int x, int y);
 
 int			tex_map(t_params *p);
 int			param_parser(char *file, t_player *player, t_params *p);
@@ -157,7 +157,7 @@ int			check_spawn(t_player *player);
 int			check_col(t_player *player);
 int			check_line(t_player *player);
 void		set_dir(t_player *player, t_params *p);
-void		remove_nl(char *str);
+void		remove_nl(t_params *p);
 int			parser(char *file, t_player *player);
 
 #endif

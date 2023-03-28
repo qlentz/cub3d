@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:14:18 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/28 03:43:54 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/29 00:04:18 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	check_char_map(t_player *player, t_params *p, int fd)
 
 	(void)player;
 	n = 0;
-	line = p->paramsarr[0][1];
+	line = p->pa[0][1];
 	while (line)
 	{
 		line = get_next_line(fd);
