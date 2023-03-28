@@ -6,7 +6,7 @@
 /*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:07:57 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/28 16:20:16 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/03/28 18:15:49 by mpouce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ typedef struct s_ivector {
 	int y;
 }				t_ivector;
 
+typedef struct s_textpixel
+{
+	t_ivector	tex;
+	int			offset;
+}				t_textpixel;
+
 typedef struct s_texture {
 	void	*img_ptr;
 	char	*addr;
@@ -89,6 +95,11 @@ typedef struct s_ray {
 	double 		perpWallDist;
 }				t_ray;
 
+
+/* draw_walls.c */
+int		get_pixel_color(t_texture *texture, int x, int y);
+void	draw_wall_line(t_player *player, t_ray *ray, int x, t_textpixel *tex);
+void	draw_wall(t_player *player, t_ray *ray, int x, int line_height);
 
 void	pixel_put(t_img *data, int x, int y, int color);
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
