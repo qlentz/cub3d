@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 17:19:27 by qlentz            #+#    #+#             */
-/*   Updated: 2022/12/19 21:12:20 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/22 16:11:42 by mpouce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ int	hook_keydown(int key, t_player *player)
 {
 	if (key == K_ESC)
 		close_win(player->mlx);
-	else if (key == K_UP)
+	else if (key == K_UP || key == K_W)
 	{
 		if((int)player->worldMap[(int)(player->pos.x + player->dir.x)][(int)player->pos.y] == 0)
 			player->pos.x += player->dir.x * 0.25;
 		if((int)player->worldMap[(int)player->pos.x][(int)(player->pos.y + player->dir.y)] == 0)
 			player->pos.y += player->dir.y * 0.25;
 	}
-	else if (key == K_DOWN)
+	else if (key == K_DOWN || key == K_S)
 	{
 		if((int)player->worldMap[(int)(player->pos.x - player->dir.x)][(int)player->pos.y] == 0)
 			player->pos.x -= player->dir.x * 0.25;
@@ -48,6 +48,21 @@ int	hook_keydown(int key, t_player *player)
 		player->plane.x = player->plane.x * cos(-0.1) - player->plane.y * sin(-0.1);
 		player->plane.y = oldPlaneX * sin(-0.1) + player->plane.y * cos(-0.1);
 	}
+	else if (key == K_A)
+	{
+		if((int)player->worldMap[(int)(player->pos.x - player->plane.x)][(int)player->pos.y] == 0)
+			player->pos.x -= player->plane.x * 0.25;
+		if((int)player->worldMap[(int)player->pos.x][(int)(player->pos.y - player->plane.y)] == 0)
+			player->pos.y -= player->plane.y * 0.25;
+	}
+	else if (key == K_D)
+	{
+		if((int)player->worldMap[(int)(player->pos.x + player->plane.x)][(int)player->pos.y] == 0)
+			player->pos.x += player->plane.x * 0.25;
+		if((int)player->worldMap[(int)player->pos.x][(int)(player->pos.y + player->plane.y)] == 0)
+			player->pos.y += player->plane.y * 0.25;
+	}
+		
 	reset(encode_rgb(121, 210, 227), encode_rgb(0, 0, 0), player->mlx->img);
 	raycast(player);
 	mlx_put_image_to_window(player->mlx->mlx, player->mlx->win, player->mlx->img->img, 0, 0);

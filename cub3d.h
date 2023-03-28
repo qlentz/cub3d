@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:07:57 by qlentz            #+#    #+#             */
-/*   Updated: 2022/12/19 21:14:45 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/28 16:20:16 by mpouce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,14 @@
 # define MAPH 		24
 # define K_ESC 		53
 # define K_UP		126
+# define K_W		13
 # define K_DOWN		125
+# define K_S		1
 # define K_LEFT		123
+# define K_A		0
 # define K_RIGHT	124
+# define K_D		2
+
 # include "mlx.h"
 # include "math.h"
 # include "stdio.h"
@@ -50,6 +55,16 @@ typedef struct s_ivector {
 	int y;
 }				t_ivector;
 
+typedef struct s_texture {
+	void	*img_ptr;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}				t_texture;
+
 typedef struct s_player {
 	t_vector	pos;
 	t_vector	dir;
@@ -58,6 +73,7 @@ typedef struct s_player {
 	double		rotspeed;
 	int			**worldMap;
 	t_mlx		*mlx;
+	t_texture	texture[4];
 }				t_player;
 
 typedef struct s_ray {
@@ -73,12 +89,14 @@ typedef struct s_ray {
 	double 		perpWallDist;
 }				t_ray;
 
+
 void	pixel_put(t_img *data, int x, int y, int color);
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 void	close_win(t_mlx *mlx);
-void	ver_line(t_mlx *mlx, int x, t_ivector coordinates, int color);
+//void	ver_line(t_mlx *mlx, int x, t_ivector coordinates, int color);
 void	reset(int sky, int floor, t_img *img);
 void	raycast(t_player *player);
 int		hook_keydown(int key, t_player *player);
-
+int get_pixel_color(t_texture *texture, int x, int y);
+void	ver_line(t_player *player, int x, t_ray *ray, int **map, int start_x);
 #endif
