@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:07:57 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/28 21:10:15 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/28 21:12:01 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,12 @@ typedef struct s_texture {
 	int		line_len;
 	int		endian;
 }				t_texture;
+
+typedef struct s_color {
+	int	r;
+	int	g;
+	int	b;
+}				t_color;
 
 typedef struct s_params {
 	char 	**paramsarr[6];

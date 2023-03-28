@@ -2,7 +2,7 @@ NAME = cub3d
 
 CC = gcc
 
-CFLAGS	= -Wall -Werror -Wextra -I $(MLX) -I $(LIBFT) -g
+CFLAGS	= -I $(MLX) -I $(LIBFT) -g
 
 MLX = mlx
 
@@ -11,7 +11,7 @@ LIBFT = libft
 FRAMEWORK = -framework OpenGl -framework AppKit
 
 SRCS = utils.c render.c hooks.c parser.c color_parser.c \
-		param_parser.c map_parser.c map_checks.c main.c
+		param_parser.c map_parser.c map_checks.c draw_walls.c main.c
 
 OBJS = $(SRCS:.c=.o)
 
