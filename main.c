@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:12:56 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/28 18:13:10 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/28 22:58:23 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,6 @@ int	main(void)
 			&img.line_length, &img.endian);
 	mlx.img = &img;
 	player.mlx = &mlx;
-	player.texture[0].img_ptr = mlx_xpm_file_to_image(player.mlx->mlx, "textures/wall.xpm", &player.texture[0].width, &player.texture[0].height);
-    player.texture[0].addr = mlx_get_img_addr(player.texture[0].img_ptr, &player.texture[0].bpp, &player.texture[0].line_len, &player.texture[0].endian);
-    player.texture[1].img_ptr = mlx_xpm_file_to_image(player.mlx->mlx, "textures/eagle.xpm", &player.texture[1].width, &player.texture[1].height);
-    player.texture[1].addr = mlx_get_img_addr(player.texture[1].img_ptr, &player.texture[1].bpp, &player.texture[1].line_len, &player.texture[1].endian);
-    player.texture[2].img_ptr = mlx_xpm_file_to_image(player.mlx->mlx, "textures/wall_2.xpm", &player.texture[2].width, &player.texture[2].height);
-    player.texture[2].addr = mlx_get_img_addr(player.texture[2].img_ptr, &player.texture[2].bpp, &player.texture[2].line_len, &player.texture[2].endian);
-    player.texture[3].img_ptr = mlx_xpm_file_to_image(player.mlx->mlx, "textures/side_2.xpm", &player.texture[3].width, &player.texture[3].height);
-    player.texture[3].addr = mlx_get_img_addr(player.texture[3].img_ptr, &player.texture[3].bpp, &player.texture[3].line_len, &player.texture[3].endian);
 	if (!parser("bite.cub", &player))
 	{
 		ft_putendl_fd("error !", 2);

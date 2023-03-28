@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:07:57 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/28 21:12:01 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/28 22:36:34 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ int			check_spawn(t_player *player);
 int			check_col(t_player *player);
 int			check_line(t_player *player);
 void		set_dir(t_player *player, t_params *p);
+void		remove_nl(char *str);
 int			parser(char *file, t_player *player);
 
 #endif

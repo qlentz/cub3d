@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:22:45 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/28 18:11:53 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/28 22:57:48 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,18 @@ void	set_params(t_player *pl, t_texes *t, t_params *p)
 	t->c.r = p->colors[1].r;
 	t->c.g = p->colors[1].g;
 	t->c.b = p->colors[1].b;
-	t->no.tex = mlx_xpm_file_to_image(pl->mlx->mlx,
-			p->paramsarr[find_tex("NO", p)][1], &t->no.width, &t->no.height);
-	t->so.tex = mlx_xpm_file_to_image(pl->mlx->mlx,
-			p->paramsarr[find_tex("SO", p)][1], &t->so.width, &t->so.height);
-	t->ea.tex = mlx_xpm_file_to_image(pl->mlx->mlx,
-			p->paramsarr[find_tex("EA", p)][1], &t->ea.width, &t->ea.height);
-	t->we.tex = mlx_xpm_file_to_image(pl->mlx->mlx,
-			p->paramsarr[find_tex("WE", p)][1], &t->we.width, &t->we.height);
+	remove_nl(p->paramsarr[find_tex("SO", p)][1]);
+	remove_nl(p->paramsarr[find_tex("NO", p)][1]);
+	remove_nl(p->paramsarr[find_tex("EA", p)][1]);
+	remove_nl(p->paramsarr[find_tex("WE", p)][1]);
+	pl->texture[0].img_ptr = mlx_xpm_file_to_image(pl->mlx->mlx, p->paramsarr[find_tex("SO", p)][1], &pl->texture[0].width, &pl->texture[0].height);
+    pl->texture[0].addr = mlx_get_img_addr(pl->texture[0].img_ptr, &pl->texture[0].bpp, &pl->texture[0].line_len, &pl->texture[0].endian);
+    pl->texture[1].img_ptr = mlx_xpm_file_to_image(pl->mlx->mlx, p->paramsarr[find_tex("WE", p)][1], &pl->texture[1].width, &pl->texture[1].height);
+    pl->texture[1].addr = mlx_get_img_addr(pl->texture[1].img_ptr, &pl->texture[1].bpp, &pl->texture[1].line_len, &pl->texture[1].endian);
+	pl->texture[2].img_ptr = mlx_xpm_file_to_image(pl->mlx->mlx, p->paramsarr[find_tex("NO", p)][1], &pl->texture[2].width, &pl->texture[2].height);
+    pl->texture[2].addr = mlx_get_img_addr(pl->texture[2].img_ptr, &pl->texture[2].bpp, &pl->texture[2].line_len, &pl->texture[2].endian);
+	pl->texture[3].img_ptr = mlx_xpm_file_to_image(pl->mlx->mlx, p->paramsarr[find_tex("EA", p)][1], &pl->texture[3].width, &pl->texture[3].height);
+    pl->texture[3].addr = mlx_get_img_addr(pl->texture[3].img_ptr, &pl->texture[3].bpp, &pl->texture[3].line_len, &pl->texture[3].endian);
 }
 
 int	find_tex(char *t, t_params *p)

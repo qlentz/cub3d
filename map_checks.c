@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 03:34:27 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/28 17:45:49 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/28 22:57:54 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,4 +118,9 @@ void	set_dir(t_player *player, t_params *p)
 		player->plane.x = player->plane.x * cos(-1.6) - player->plane.y * sin(-1.6);
 		player->plane.y = oldPlaneX * sin(-1.6) + player->plane.y * cos(-1.6);
 	}
+}
+
+void	remove_nl(char *str)
+{
+	*(ft_strchr(str, '\n')) = 0;
 }
