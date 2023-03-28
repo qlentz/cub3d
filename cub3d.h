@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:07:57 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/28 18:18:59 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/28 21:10:15 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ typedef struct s_ivector {
 	int y;
 }				t_ivector;
 
-typedef struct s_color {
-	int r;
-	int g;
-	int b;
-}				t_color;
+typedef struct s_textpixel
+{
+	t_ivector	tex;
+	int			offset;
+}				t_textpixel;
 
 typedef struct s_texture {
 	void	*img_ptr;
@@ -120,10 +120,15 @@ typedef struct s_ray {
 }				t_ray;
 
 
+/* draw_walls.c */
+int		get_pixel_color(t_texture *texture, int x, int y);
+void	draw_wall_line(t_player *player, t_ray *ray, int x, t_textpixel *tex);
+void	draw_wall(t_player *player, t_ray *ray, int x, int line_height);
+
 void	pixel_put(t_img *data, int x, int y, int color);
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 void	close_win(t_mlx *mlx);
-//void	ver_line(t_mlx *mlx, int x, t_ivector coordinates, int color);
+void	ver_line(t_mlx *mlx, int x, t_ivector coordinates, int color);
 void	reset(int sky, int floor, t_img *img);
 void	raycast(t_player *player);
 int		hook_keydown(int key, t_player *player);
