@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:08:48 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/28 16:25:19 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/03/28 21:05:41 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ void	raycast(t_player *player)
 	double wall_X;
 	
 	x = 0;
-	int last_x = -1;
 	while (x < SCREENW)
 	{
 		offset = 0;
@@ -146,7 +145,7 @@ void	raycast(t_player *player)
 			wall_X = player->pos.x + ray.perpWallDist * ray.rayDir.x;
 		wall_X -= floor(wall_X);
 		tex_X = (int)(wall_X * player->texture[ray.side + offset].width);
-		//printf("wall_X is %f, tex_X is %d\n", wall_X, tex_X);
+		printf("wall_X is %f, tex_X is %d\n", wall_X, tex_X);
 		if (ray.side == 0 && ray.rayDir.x > 0)
 			tex_X = player->texture[ray.side + offset].width - tex_X - 1;
 		if (ray.side == 0 && ray.rayDir.x < 0)
@@ -165,7 +164,6 @@ void	raycast(t_player *player)
 		double tex_pos = (ray.draw.x - SCREENH / 2 + line_height / 2) * tex_step;
 		for (int i = ray.draw.x; i < ray.draw.y; i++)
 		{
-			//printf("tex coord : %d,%d\n", tex_X, tex_Y);
 			tex_Y = (int)tex_pos & (player->texture[ray.side + offset].height - 1);
 			tex_pos += tex_step;
 			color = get_pixel_color(&player->texture[ray.side + offset], tex_X, tex_Y);

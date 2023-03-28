@@ -2,7 +2,7 @@ NAME = cub3d
 
 CC = gcc
 
-CFLAGS	= -I ./mlx 
+CFLAGS	= -Wall -Werror -Wextra -I $(MLX) -I $(LIBFT) -g
 
 MLX = mlx
 
@@ -10,7 +10,8 @@ LIBFT = libft
 
 FRAMEWORK = -framework OpenGl -framework AppKit
 
-SRCS = utils.c render.c hooks.c main.c
+SRCS = utils.c render.c hooks.c parser.c color_parser.c \
+		param_parser.c map_parser.c map_checks.c main.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -19,15 +20,18 @@ all: lib $(NAME)
 
 lib:
 	@make -C $(MLX)
+	@make -C $(LIBFT)
 
 $(NAME): $(OBJS)
-		$(CC) $(CFLAGS) -L $(MLX) -o $@ $^ -lmlx $(FRAMEWORK)
+		$(CC) $(CFLAGS) -L $(MLX) -L $(LIBFT) -o $@ $^ -lmlx -lft $(FRAMEWORK)
 
 clean:
 	@make -C $(MLX) clean
+	@make -C $(LIBFT) clean
 	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
+	@make -C $(LIBFT) fclean
 
 re: fclean all
