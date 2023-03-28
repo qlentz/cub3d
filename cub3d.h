@@ -6,7 +6,7 @@
 /*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:07:57 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/28 18:15:49 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/03/28 18:18:53 by mpouce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,10 @@ void	draw_wall(t_player *player, t_ray *ray, int x, int line_height);
 void	pixel_put(t_img *data, int x, int y, int color);
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 void	close_win(t_mlx *mlx);
-//void	ver_line(t_mlx *mlx, int x, t_ivector coordinates, int color);
+void	ver_line(t_mlx *mlx, int x, t_ivector coordinates, int color);
 void	reset(int sky, int floor, t_img *img);
 void	raycast(t_player *player);
 int		hook_keydown(int key, t_player *player);
 int get_pixel_color(t_texture *texture, int x, int y);
-void	ver_line(t_player *player, int x, t_ray *ray, int **map, int start_x);
+
 #endif

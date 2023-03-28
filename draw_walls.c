@@ -6,9 +6,11 @@
 /*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:14:59 by mpouce            #+#    #+#             */
-/*   Updated: 2023/03/28 18:15:13 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/03/28 18:19:48 by mpouce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cub3d.h"
 
 int	get_pixel_color(t_texture *texture, int x, int y)
 {
