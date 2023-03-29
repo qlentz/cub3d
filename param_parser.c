@@ -6,13 +6,13 @@
 /*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:15:43 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 14:58:12 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/03/29 15:18:37 by mpouce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int tex_map(t_params *p)
+int	tex_map(t_params *p)
 {
 	char	*tab[6];
 	int		i;
@@ -25,7 +25,6 @@ int tex_map(t_params *p)
 	tab[3] = "WE";
 	tab[4] = "F";
 	tab[5] = "C";
-	
 	i = 0;
 	if (!p->pa[j])
 		return (1);
@@ -46,10 +45,9 @@ int tex_map(t_params *p)
 		j++;
 	}
 	return (1);
-	
 }
 
-t_params *init_params(void)
+t_params	*init_params(void)
 {
 	int			i;
 	t_params	*p;
@@ -61,7 +59,7 @@ t_params *init_params(void)
 		p->pa[i] = NULL;
 		i++;
 	}
-	return (p);	
+	return (p);
 }
 
 int	free_param(t_params *p)
@@ -103,6 +101,6 @@ int	read_params(int fd, t_params *p)
 		free(line);
 	}
 	if (!tex_map(p))
-		return(free_param(p));
-	return(1);
+		return (free_param(p));
+	return (1);
 }

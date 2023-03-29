@@ -6,22 +6,22 @@
 /*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:14:18 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 15:07:24 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/03/29 15:16:02 by mpouce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    print_2d(char **s)
+void	print_2d(char **s)
 {
-        int     i;
+	int	i;
 
-        i = 0;
-        while (s[i])
-        {
-                printf("%s\n", s[i]);
-                i++;
-        }
+	i = 0;
+	while (s[i])
+	{
+		printf("%s\n", s[i]);
+		i++;
+	}
 }
 
 int	parser(char *file, t_player *player)
@@ -30,11 +30,11 @@ int	parser(char *file, t_player *player)
 
 	p = init_params();
 	if (!param_parser(file, player, p))
-		return 0;
+		return (0);
 	if (!map_parser(player, p))
-		return 0;
+		return (0);
 	free_param(p);
-	return 1;
+	return (1);
 }
 
 int	param_parser(char *file, t_player *player, t_params *p)
@@ -50,27 +50,24 @@ int	param_parser(char *file, t_player *player, t_params *p)
 	if (!parse_colors(p))
 		return (0);
 	set_params(player, &player->texes, p);
-	size = check_char_map(player, p, fd);
+	size = check_char_map(p, fd);
 	close(fd);
 	return (size);
 }
 
-int	check_char_map(t_player *player, t_params *p, int fd)
+int	check_char_map(t_params *p, int fd)
 {
 	char	*line;
 	int		n;
 
-	(void)player;
 	n = 0;
-	if (!p->pa[0][1])
-		return (0);
 	line = p->pa[0][1];
 	p->lst = 0;
 	while (line)
 	{
 		line = get_next_line(fd);
-		if	(!line)
-			break;
+		if (!line)
+			break ;
 		if (!string_map_check(line))
 		{
 			free(line);
@@ -89,12 +86,13 @@ int	check_char_map(t_player *player, t_params *p, int fd)
 
 int	string_map_check(char *s)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = s;
 	while (*s)
 	{
-		if (*s == '1' || *s == '0' || *s == 'S' || *s == 'N' || *s == 'W' || *s == 'E' || *s == ' ' || *s == '\n')
+		if (*s == '1' || *s == '0' || *s == 'S' || *s == 'N'
+			|| *s == 'W' || *s == 'E' || *s == ' ' || *s == '\n')
 			s++;
 		else
 			return (0);
@@ -102,4 +100,3 @@ int	string_map_check(char *s)
 	s = tmp;
 	return (1);
 }
-

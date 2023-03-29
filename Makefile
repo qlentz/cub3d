@@ -20,7 +20,7 @@ all: lib $(NAME)
 
 lib:
 	@make -C $(MLX)
-	@make -C $(LIBFT)
+	@make -sC $(LIBFT)
 
 $(NAME): $(OBJS)
 		$(CC) $(CFLAGS) -L $(MLX) -L $(LIBFT) -o $@ $^ -lmlx -lft $(FRAMEWORK)

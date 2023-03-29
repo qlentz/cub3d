@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:12:56 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 00:01:22 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/29 15:21:40 by mpouce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void free_array(int **array)
+void	free_array(int **array)
 {
 	for (int i = 0; i < 24; i++)
 	{

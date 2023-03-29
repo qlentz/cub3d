@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 03:34:27 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 00:20:49 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/29 15:21:15 by mpouce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_col(t_player *player)
 	{
 		j = 0;
 		while (j < player->mapsize.y - 1 && map[j][i] == 3)
-			j++;			
+			j++;
 		if (map[j][i] != 1)
 			return (0);
 		j = player->mapsize.y - 1;
@@ -78,7 +78,7 @@ int	check_line(t_player *player)
 	{
 		j = 0;
 		while (j < player->mapsize.x - 1 && map[i][j] == 3)
-			j++;			
+			j++;
 		if (map[i][j] != 1)
 			return (0);
 		j = player->mapsize.x - 1;

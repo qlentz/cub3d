@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:41:44 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/28 03:36:45 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/29 15:19:58 by mpouce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	largest_line(t_params *p)
 	}
 	return (n);
 }
-
 
 void	clone_line(int *tab, int size, char *s, t_params *p)
 {
@@ -58,7 +57,7 @@ int	map_to_int(t_player *player, t_params *p)
 {
 	t_list	*tmp;
 	int		i;
-	
+
 	i = 0;
 	tmp = p->lst;
 	player->mapsize.y = ft_lstsize(p->lst);
@@ -71,14 +70,15 @@ int	map_to_int(t_player *player, t_params *p)
 		player->worldMap[i] = (int *)malloc(sizeof(int) * player->mapsize.x);
 		if (!player->worldMap[i])
 			return (0);
-		clone_line(player->worldMap[i], player->mapsize.x, (char *)tmp->content, p);
+		clone_line(player->worldMap[i], player->mapsize.x,
+			(char *)tmp->content, p);
 		tmp = tmp->next;
 		i++;
 	}
 	return (1);
 }
 
-void print_tab(int **tab, int w, int h)
+void	print_tab(int **tab, int w, int h)
 {
 	int	i;
 	int	j;
@@ -112,4 +112,3 @@ int	map_parser(t_player *player, t_params *p)
 	set_dir(player, p);
 	return (1);
 }
-

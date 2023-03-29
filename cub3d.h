@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:07:57 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 00:20:44 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/29 15:14:53 by mpouce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int			free_param(t_params *p);
 t_params	*init_params(void);
 int			bind_colors(t_params *p, char **arr, int a);
 int			arr_digit(char **arr);
-int			check_char_map(t_player *player, t_params *p, int fd);
+int			check_char_map(t_params *p, int fd);
 int			string_map_check(char *s);
 void		set_params(t_player *pl, t_texes *t, t_params *p);
 int			map_parser(t_player *player, t_params *p);
