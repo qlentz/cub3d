@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:15:43 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 00:04:18 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/29 14:58:12 by mpouce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@ int tex_map(t_params *p)
 	tab[3] = "WE";
 	tab[4] = "F";
 	tab[5] = "C";
-
-	while (p->pa[j])
+	
+	i = 0;
+	if (!p->pa[j])
+		return (1);
+	while (j < 6 && p->pa[j])
 	{
 		i = 0;
 		while (i < 6)
 		{
-			if (ft_strcmp(p->pa[j][0], tab[i]) == 0)
+			if (tab[i] && p->pa[j][0] && ft_strcmp(p->pa[j][0], tab[i]) == 0)
 			{
 				tab[i] = ".";
 				i = 10;
