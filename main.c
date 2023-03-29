@@ -6,7 +6,7 @@
 /*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:12:56 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 15:21:40 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/03/29 15:26:57 by mpouce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ void	free_array(int **array)
 		free(array[i]);
 	}
 	free(array);
+}
+
+void	fatal_error(char *str)
+{
+	write (2, "Error\n", 6);
+	while (*str)
+		write (2, str++, 1);
+	write (2, "\n", 1);
+	exit(1);
 }
 
 int	main(void)
