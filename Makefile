@@ -2,7 +2,7 @@ NAME = cub3d
 
 CC = gcc
 
-CFLAGS	= -I $(MLX) -I $(LIBFT) -g
+CFLAGS	= -fsanitize=address -I $(MLX) -I $(LIBFT) -g
 
 MLX = mlx
 
