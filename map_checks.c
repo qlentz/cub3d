@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 03:34:27 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 15:21:15 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/03/31 23:40:22 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	check_spawn(t_player *player)
 		j = 0;
 		while (j < player->mapsize.x)
 		{
-			if (player->worldMap[i][j] == 7)
+			if (player->worldmap[i][j] == 7)
 			{
 				player->pos.x = i;
 				player->pos.y = j;
-				player->worldMap[i][j] = 0;
+				player->worldmap[i][j] = 0;
 				n += 1;
 			}
 			j++;
@@ -47,7 +47,7 @@ int	check_col(t_player *player)
 
 	i = 0;
 	j = 0;
-	map = player->worldMap;
+	map = player->worldmap;
 	while (i < player->mapsize.x - 1)
 	{
 		j = 0;
@@ -73,7 +73,7 @@ int	check_line(t_player *player)
 
 	i = 0;
 	j = 0;
-	map = player->worldMap;
+	map = player->worldmap;
 	while (i < player->mapsize.y)
 	{
 		j = 0;
@@ -101,23 +101,9 @@ void	set_dir(t_player *player, t_params *p)
 		player->plane.y *= -1;
 	}
 	else if (p->dir == 'W')
-	{
-		double oldDirX = player->dir.x;
-		player->dir.x = player->dir.x * cos(1.6) - player->dir.y * sin(1.6);
-		player->dir.y = oldDirX * sin(1.6) + player->dir.y * cos(1.6);
-		double oldPlaneX = player->plane.x;
-		player->plane.x = player->plane.x * cos(1.6) - player->plane.y * sin(1.6);
-		player->plane.y = oldPlaneX * sin(1.6) + player->plane.y * cos(1.6);
-	}
+		rotate(player, 1.6);
 	else if (p->dir == 'E')
-	{
-		double oldDirX = player->dir.x;
-		player->dir.x = player->dir.x * cos(-1.6) - player->dir.y * sin(-1.6);
-		player->dir.y = oldDirX * sin(-1.6) + player->dir.y * cos(-1.6);
-		double oldPlaneX = player->plane.x;
-		player->plane.x = player->plane.x * cos(-1.6) - player->plane.y * sin(-1.6);
-		player->plane.y = oldPlaneX * sin(-1.6) + player->plane.y * cos(-1.6);
-	}
+		rotate(player, -1.6);
 }
 
 void	remove_nl(t_params *p)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:14:18 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 15:16:02 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/03/31 23:55:36 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,15 @@ int	param_parser(char *file, t_player *player, t_params *p)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (0);
+		fatal_error("failed to open map");
 	if (!read_params(fd, p))
-		return (0);
+		fatal_error("Problem with parameters");
 	if (!parse_colors(p))
-		return (0);
+		fatal_error("Problem with F or C colors");
 	set_params(player, &player->texes, p);
 	size = check_char_map(p, fd);
+	if (size == 0)
+		fatal_error("Wrong char in map");
 	close(fd);
 	return (size);
 }

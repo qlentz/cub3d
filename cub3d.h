@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:07:57 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 15:14:53 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/03/31 23:44:53 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_vector {
 
 typedef struct s_ivector {
 	int	x;
-	int y;
+	int	y;
 }				t_ivector;
 
 typedef struct s_textpixel
@@ -78,7 +78,7 @@ typedef struct s_color {
 }				t_color;
 
 typedef struct s_params {
-	char 	**pa[6];
+	char	**pa[6];
 	t_color	colors[2];
 	t_list	*lst;
 	char	dir;
@@ -106,40 +106,36 @@ typedef struct s_player {
 	t_ivector	mapsize;
 	double		movespeed;
 	double		rotspeed;
-	int			**worldMap;
+	int			**worldmap;
 	t_texes		texes;
 	t_mlx		*mlx;
 	t_texture	tex[4];
 }				t_player;
 
 typedef struct s_ray {
-	t_vector	rayDir;
-	t_vector	sideDist;
-	t_vector	deltaDist;
+	t_vector	raydir;
+	t_vector	sidedist;
+	t_vector	deltadist;
 	t_ivector	map;
 	t_vector	step;
-	double 		camerax;
+	double		camerax;
 	int			hit;
 	int			side;
 	t_ivector	draw;
-	double 		perpWallDist;
+	double		perpwalldist;
 }				t_ray;
 
-
-/* draw_walls.c */
-int		get_pixel_color(t_texture *tex, int x, int y);
-void	draw_wall_line(t_player *player, t_ray *ray, int x, t_textpixel *tex);
-void	draw_wall(t_player *player, t_ray *ray, int x, int line_height);
-
-void	pixel_put(t_img *data, int x, int y, int color);
-int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
-void	close_win(t_mlx *mlx);
-void	ver_line(t_mlx *mlx, int x, t_ivector coordinates, int color);
-void	reset(int sky, int floor, t_img *img);
-void	raycast(t_player *player);
-int		hook_keydown(int key, t_player *player);
-int get_pixel_color(t_texture *tex, int x, int y);
-
+int			get_pixel_color(t_texture *tex, int x, int y);
+void		draw_wall_line(t_player *p, t_ray *ray, int x, t_textpixel *tex);
+void		draw_wall(t_player *player, t_ray *ray, int x, int line_height);
+void		pixel_put(t_img *data, int x, int y, int color);
+int			encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
+void		close_win(t_mlx *mlx);
+void		ver_line(t_mlx *mlx, int x, t_ivector coordinates, int color);
+void		reset(int sky, int floor, t_img *img);
+void		raycast(t_player *player);
+int			hook_keydown(int key, t_player *player);
+int			get_pixel_color(t_texture *tex, int x, int y);
 int			tex_map(t_params *p);
 int			param_parser(char *file, t_player *player, t_params *p);
 int			parse_colors(t_params *p);
@@ -159,5 +155,9 @@ int			check_line(t_player *player);
 void		set_dir(t_player *player, t_params *p);
 void		remove_nl(t_params *p);
 int			parser(char *file, t_player *player);
+void		rotate(t_player *p, double value);
+void		strafe(t_player *p, int val);
+void		move_updown(t_player *p, int val);
+void		fatal_error(char *str);
 
 #endif
