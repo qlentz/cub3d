@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 17:19:27 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/31 23:40:22 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/01 19:17:48 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	hook_keydown(int key, t_player *p)
 		strafe(p, -1);
 	else if (key == K_D)
 		strafe(p, 1);
-	reset(encode_rgb(121, 210, 227), encode_rgb(0, 0, 0), p->mlx->img);
+	reset(p->ceiling, p->floor, p->mlx->img);
 	raycast(p);
 	mlx_put_image_to_window(p->mlx->mlx, p->mlx->win, p->mlx->img->img, 0, 0);
 	return (0);

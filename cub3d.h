@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:07:57 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/31 23:44:53 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/01 19:23:53 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,6 @@ typedef struct s_tex {
 	int		height;
 }				t_tex;
 
-typedef struct s_texes {
-	t_tex	no;
-	t_tex	so;
-	t_tex	ea;
-	t_tex	we;
-	t_color	f;
-	t_color	c;
-}				t_texes;
-
 typedef struct s_player {
 	t_vector	pos;
 	t_vector	dir;
@@ -107,7 +98,8 @@ typedef struct s_player {
 	double		movespeed;
 	double		rotspeed;
 	int			**worldmap;
-	t_texes		texes;
+	int			floor;
+	int			ceiling;
 	t_mlx		*mlx;
 	t_texture	tex[4];
 }				t_player;
@@ -147,7 +139,7 @@ int			bind_colors(t_params *p, char **arr, int a);
 int			arr_digit(char **arr);
 int			check_char_map(t_params *p, int fd);
 int			string_map_check(char *s);
-void		set_params(t_player *pl, t_texes *t, t_params *p);
+void		set_params(t_player *pl, t_params *p);
 int			map_parser(t_player *player, t_params *p);
 int			check_spawn(t_player *player);
 int			check_col(t_player *player);
@@ -159,5 +151,6 @@ void		rotate(t_player *p, double value);
 void		strafe(t_player *p, int val);
 void		move_updown(t_player *p, int val);
 void		fatal_error(char *str);
+int			end_cub(char *s);
 
 #endif

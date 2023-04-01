@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:14:18 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/31 23:55:36 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/01 19:22:19 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	parser(char *file, t_player *player)
 	t_params	*p;
 
 	p = init_params();
+	if (!end_cub(file))
+		fatal_error("Unknown file extension");
 	if (!param_parser(file, player, p))
 		return (0);
 	if (!map_parser(player, p))
@@ -49,7 +51,7 @@ int	param_parser(char *file, t_player *player, t_params *p)
 		fatal_error("Problem with parameters");
 	if (!parse_colors(p))
 		fatal_error("Problem with F or C colors");
-	set_params(player, &player->texes, p);
+	set_params(player, p);
 	size = check_char_map(p, fd);
 	if (size == 0)
 		fatal_error("Wrong char in map");
