@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:22:45 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 00:22:27 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/02 23:26:20 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,10 @@ int	bind_colors(t_params *p, char **arr, int a)
 	return (1);
 }
 
-void	set_params(t_player *pl, t_texes *t, t_params *p)
+void	set_params(t_player *pl, t_params *p)
 {
-	t->f.r = p->colors[0].r;
-	t->f.g = p->colors[0].g;
-	t->f.b = p->colors[0].b;
-	t->c.r = p->colors[1].r;
-	t->c.g = p->colors[1].g;
-	t->c.b = p->colors[1].b;
-	remove_nl(p);
+	pl->ceiling = encode_rgb(p->colors[1].r, p->colors[1].g, p->colors[1].b);
+	pl->floor = encode_rgb(p->colors[0].r, p->colors[0].g, p->colors[0].b);
 	pl->tex[0].img_ptr = mlx_xpm_file_to_image(pl->mlx->mlx,
 			p->pa[find_tex("SO", p)][1], &pl->tex[0].width, &pl->tex[0].height);
 	pl->tex[0].addr = mlx_get_img_addr(pl->tex[0].img_ptr,

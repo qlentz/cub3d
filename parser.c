@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:14:18 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 15:16:02 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/04/02 23:25:48 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	parser(char *file, t_player *player)
 	t_params	*p;
 
 	p = init_params();
+	if (!end_cub(file))
+		fatal_error("Unknown file extension");
 	if (!param_parser(file, player, p))
 		return (0);
 	if (!map_parser(player, p))
@@ -44,13 +46,17 @@ int	param_parser(char *file, t_player *player, t_params *p)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (0);
+		fatal_error("failed to open map");
 	if (!read_params(fd, p))
-		return (0);
+		fatal_error("Problem with parameters");
 	if (!parse_colors(p))
-		return (0);
-	set_params(player, &player->texes, p);
+		fatal_error("Problem with F or C colors");
+	if (!check_tex(p))
+		fatal_error("Unable to load textures");
+	set_params(player, p);
 	size = check_char_map(p, fd);
+	if (size == 0)
+		fatal_error("Wrong char in map");
 	close(fd);
 	return (size);
 }

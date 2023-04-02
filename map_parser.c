@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:41:44 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 15:19:58 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/04/02 22:59:24 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	clone_line(int *tab, int size, char *s, t_params *p)
 	int	i;
 
 	i = 0;
-	ft_printf("clone: %s", s);
 	while (s[i])
 	{
 		if (s[i] == ' ' || s[i] == '\n')
@@ -62,15 +61,15 @@ int	map_to_int(t_player *player, t_params *p)
 	tmp = p->lst;
 	player->mapsize.y = ft_lstsize(p->lst);
 	player->mapsize.x = largest_line(p);
-	player->worldMap = (int **)malloc(sizeof(int *) * player->mapsize.y);
-	if (!player->worldMap)
+	player->worldmap = (int **)malloc(sizeof(int *) * player->mapsize.y);
+	if (!player->worldmap)
 		return (0);
 	while (tmp)
 	{
-		player->worldMap[i] = (int *)malloc(sizeof(int) * player->mapsize.x);
-		if (!player->worldMap[i])
+		player->worldmap[i] = (int *)malloc(sizeof(int) * player->mapsize.x);
+		if (!player->worldmap[i])
 			return (0);
-		clone_line(player->worldMap[i], player->mapsize.x,
+		clone_line(player->worldmap[i], player->mapsize.x,
 			(char *)tmp->content, p);
 		tmp = tmp->next;
 		i++;
@@ -102,13 +101,11 @@ int	map_parser(t_player *player, t_params *p)
 {
 	if (!map_to_int(player, p))
 		return (0);
-	printf("lines: %i largest: %i\n", player->mapsize.y, player->mapsize.x);
-	print_tab(player->worldMap, player->mapsize.x, player->mapsize.y);
-	player->worldMap = player->worldMap;
-	if (!check_line(player) || !check_col(player))
-		return (0);
+	player->worldmap = player->worldmap;
+	if (!check_line(player) || !check_col(player) || !extra_map_check(player))
+		fatal_error("map not closed");
 	if (check_spawn(player) != 1)
-		return (0);
+		fatal_error("Wrong spawns");
 	set_dir(player, p);
 	return (1);
 }

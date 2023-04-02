@@ -3,68 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 17:19:27 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 15:21:54 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/04/01 19:17:48 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	hook_keydown(int key, t_player *player)
+void	rotate(t_player *p, double value)
+{
+	double	dirx;
+	double	planex;
+
+	dirx = p->dir.x;
+	p->dir.x = p->dir.x * cos(value) - p->dir.y * sin(value);
+	p->dir.y = dirx * sin(value) + p->dir.y * cos(value);
+	planex = p->plane.x;
+	p->plane.x = p->plane.x * cos(value) - p->plane.y * sin(value);
+	p->plane.y = planex * sin(value) + p->plane.y * cos(value);
+}
+
+void	strafe(t_player *p, int val)
+{
+	if ((int)p->worldmap[(int)(p->pos.x + p->plane.x * 0.25 * val)]
+		[(int)p->pos.y] == 0)
+		p->pos.x += p->plane.x * 0.25 * val;
+	if ((int)p->worldmap[(int)p->pos.x]
+		[(int)(p->pos.y + p->plane.y * 0.25 * val)] == 0)
+		p->pos.y += p->plane.y * 0.25 * val;
+}
+
+void	move_updown(t_player *p, int val)
+{
+	if ((int)p->worldmap[(int)(p->pos.x + p->dir.x * 0.25 * val)]
+		[(int)p->pos.y] == 0)
+		p->pos.x += p->dir.x * 0.25 * val;
+	if ((int)p->worldmap[(int)p->pos.x]
+		[(int)(p->pos.y + p->dir.y * 0.25 * val)] == 0)
+		p->pos.y += p->dir.y * 0.25 * val;
+}
+
+int	hook_keydown(int key, t_player *p)
 {
 	if (key == K_ESC)
-		close_win(player->mlx);
+		close_win(p->mlx);
 	else if (key == K_UP || key == K_W)
-	{
-		if((int)player->worldMap[(int)(player->pos.x + player->dir.x)][(int)player->pos.y] == 0)
-			player->pos.x += player->dir.x * 0.25;
-		if((int)player->worldMap[(int)player->pos.x][(int)(player->pos.y + player->dir.y)] == 0)
-			player->pos.y += player->dir.y * 0.25;
-	}
+		move_updown(p, 1);
 	else if (key == K_DOWN || key == K_S)
-	{
-		if((int)player->worldMap[(int)(player->pos.x - player->dir.x)][(int)player->pos.y] == 0)
-			player->pos.x -= player->dir.x * 0.25;
-		if((int)player->worldMap[(int)player->pos.x][(int)(player->pos.y - player->dir.y)] == 0)
-			player->pos.y -= player->dir.y * 0.25;
-	}
+		move_updown(p, -1);
 	else if (key == K_LEFT)
-	{
-		double oldDirX = player->dir.x;
-		player->dir.x = player->dir.x * cos(0.1) - player->dir.y * sin(0.1);
-		player->dir.y = oldDirX * sin(0.1) + player->dir.y * cos(0.1);
-		double oldPlaneX = player->plane.x;
-		player->plane.x = player->plane.x * cos(0.1) - player->plane.y * sin(0.1);
-		player->plane.y = oldPlaneX * sin(0.1) + player->plane.y * cos(0.1);
-	}
+		rotate(p, 0.1);
 	else if (key == K_RIGHT)
-	{
-		double oldDirX = player->dir.x;
-		player->dir.x = player->dir.x * cos(-0.1) - player->dir.y * sin(-0.1);
-		player->dir.y = oldDirX * sin(-0.1) + player->dir.y * cos(-0.1);
-		double oldPlaneX = player->plane.x;
-		player->plane.x = player->plane.x * cos(-0.1) - player->plane.y * sin(-0.1);
-		player->plane.y = oldPlaneX * sin(-0.1) + player->plane.y * cos(-0.1);
-	}
+		rotate(p, -0.1);
 	else if (key == K_A)
-	{
-		if((int)player->worldMap[(int)(player->pos.x - player->plane.x)][(int)player->pos.y] == 0)
-			player->pos.x -= player->plane.x * 0.25;
-		if((int)player->worldMap[(int)player->pos.x][(int)(player->pos.y - player->plane.y)] == 0)
-			player->pos.y -= player->plane.y * 0.25;
-	}
+		strafe(p, -1);
 	else if (key == K_D)
-	{
-		if((int)player->worldMap[(int)(player->pos.x + player->plane.x)][(int)player->pos.y] == 0)
-			player->pos.x += player->plane.x * 0.25;
-		if((int)player->worldMap[(int)player->pos.x][(int)(player->pos.y + player->plane.y)] == 0)
-			player->pos.y += player->plane.y * 0.25;
-	}
-		
-	reset(encode_rgb(121, 210, 227), encode_rgb(0, 0, 0), player->mlx->img);
-	raycast(player);
-	mlx_put_image_to_window(player->mlx->mlx, player->mlx->win, player->mlx->img->img, 0, 0);
+		strafe(p, 1);
+	reset(p->ceiling, p->floor, p->mlx->img);
+	raycast(p);
+	mlx_put_image_to_window(p->mlx->mlx, p->mlx->win, p->mlx->img->img, 0, 0);
 	return (0);
 }

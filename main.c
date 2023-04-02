@@ -3,45 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:12:56 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 15:26:57 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/04/01 19:23:52 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_array(int **array)
-{
-	for (int i = 0; i < 24; i++)
-	{
-		free(array[i]);
-	}
-	free(array);
-}
-
 void	fatal_error(char *str)
 {
-	write (2, "Error\n", 6);
-	while (*str)
-		write (2, str++, 1);
-	write (2, "\n", 1);
+	ft_printf("Error: %s\n", str);
 	exit(1);
 }
 
-int	main(void)
+void	init_player(t_player *player)
 {
-	t_player player;
-	player.pos.x = 0.0;
-	player.pos.y = 0.0;
-	player.dir.x = -1.0;
-	player.dir.y = 0.0;
-	player.plane.x = 0.0;
-	player.plane.y = 0.66;
+	player->pos.x = 0.0;
+	player->pos.y = 0.0;
+	player->dir.x = -1.0;
+	player->dir.y = 0.0;
+	player->plane.x = 0.0;
+	player->plane.y = 0.66;
+}
+
+int	main(int ac, char **av)
+{
+	t_player	player;
 	t_mlx		mlx;
 	t_img		img;
 
+	if (ac != 2)
+		fatal_error("Wrong number of arguments.");
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, SCREENW, SCREENH, "cub3d");
 	img.img = mlx_new_image(mlx.mlx, SCREENW, SCREENH);
@@ -49,15 +43,13 @@ int	main(void)
 			&img.line_length, &img.endian);
 	mlx.img = &img;
 	player.mlx = &mlx;
-	if (!parser("bite.cub", &player))
-	{
-		ft_putendl_fd("error !", 2);
-		return (1);
-	}
-	reset(encode_rgb(121, 210, 227), encode_rgb(0, 0, 0), mlx.img);
+	init_player(&player);
+	if (!parser(av[1], &player))
+		fatal_error("Parsing error");
+	reset(player.ceiling, player.floor, mlx.img);
 	raycast(&player);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img->img, 0, 0);
-	mlx_hook(mlx.win, 2, (1L<<0), hook_keydown, &player);
+	mlx_hook(mlx.win, 2, (1L << 0), hook_keydown, &player);
 	mlx_loop(mlx.mlx);
 	return (0);
 }

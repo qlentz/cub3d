@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:14:59 by mpouce            #+#    #+#             */
-/*   Updated: 2023/03/29 00:07:05 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/02 22:00:18 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	draw_wall_line(t_player *player, t_ray *ray, int x, t_textpixel *tex)
 	int		i;
 	int		color;
 
-	lh = (int)(SCREENH / ray->perpWallDist);
+	lh = (int)(SCREENH / ray->perpwalldist);
 	i = ray->draw.x;
 	tex_step = 1.0 * player->tex[ray->side + tex->offset].height / lh;
 	tex_pos = (ray->draw.x - SCREENH / 2 + lh / 2) * tex_step;
@@ -45,20 +45,19 @@ void	draw_wall_line(t_player *player, t_ray *ray, int x, t_textpixel *tex)
 	}
 }
 
-void	draw_wall(t_player *player, t_ray *ray, int x, int line_height)
+void	draw_wall(t_player *player, t_ray *ray, int x)
 {
 	t_textpixel	tex;
 	double		wall_x;
-	int			i;
 
 	tex.offset = 0;
 	if (ray->side == 0)
-		wall_x = player->pos.y + ray->perpWallDist * ray->rayDir.y;
+		wall_x = player->pos.y + ray->perpwalldist * ray->raydir.y;
 	else
-		wall_x = player->pos.x + ray->perpWallDist * ray->rayDir.x;
+		wall_x = player->pos.x + ray->perpwalldist * ray->raydir.x;
 	wall_x -= floor(wall_x);
-	if ((ray->side == 0 && ray->rayDir.x < 0)
-		|| (ray->side == 1 && ray->rayDir.y > 0))
+	if ((ray->side == 0 && ray->raydir.x < 0)
+		|| (ray->side == 1 && ray->raydir.y > 0))
 		tex.offset = 2;
 	tex.tex.x = (int)(wall_x * player->tex[ray->side + tex.offset].width);
 	tex.tex.x = player->tex[ray->side + tex.offset].width - tex.tex.x - 1;

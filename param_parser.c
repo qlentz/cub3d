@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpouce <mpouce@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:15:43 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/29 15:18:37 by mpouce           ###   ########.fr       */
+/*   Updated: 2023/03/30 02:27:59 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,29 @@
 
 int	tex_map(t_params *p)
 {
-	char	*tab[6];
-	int		i;
-	int		j;
+	char		*tab[6];
+	t_ivector	i;
 
-	j = 0;
+	i.x = -1;
 	tab[0] = "NO";
 	tab[1] = "SO";
 	tab[2] = "EA";
 	tab[3] = "WE";
 	tab[4] = "F";
 	tab[5] = "C";
-	i = 0;
-	if (!p->pa[j])
-		return (1);
-	while (j < 6 && p->pa[j])
+	while (++i.x < 6 && p->pa[i.x])
 	{
-		i = 0;
-		while (i < 6)
+		i.y = -1;
+		while (++i.y < 6)
 		{
-			if (tab[i] && p->pa[j][0] && ft_strcmp(p->pa[j][0], tab[i]) == 0)
+			if (p->pa[i.x][0] && ft_strcmp(p->pa[i.x][0], tab[i.y]) == 0)
 			{
-				tab[i] = ".";
-				i = 10;
+				tab[i.y] = ".";
+				i.y = 10;
 			}
-			i++;
 		}
-		if (i < 10)
+		if (i.y < 10)
 			return (0);
-		j++;
 	}
 	return (1);
 }

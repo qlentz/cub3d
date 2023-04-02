@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:43:47 by qlentz            #+#    #+#             */
-/*   Updated: 2022/12/19 21:15:30 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/03/31 23:22:07 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
 	return (red << 16 | green << 8 | blue);
 }
 
+/*
 void	ver_line(t_mlx *mlx, int x, t_ivector coordinates, int color)
 {
 	while (coordinates.x < coordinates.y)
@@ -39,6 +40,7 @@ void	ver_line(t_mlx *mlx, int x, t_ivector coordinates, int color)
 		coordinates.x++;
 	}
 }
+*/
 
 void	reset(int sky, int floor, t_img *img)
 {
