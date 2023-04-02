@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 23:14:18 by qlentz            #+#    #+#             */
-/*   Updated: 2023/04/01 19:22:19 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/02 23:25:48 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	param_parser(char *file, t_player *player, t_params *p)
 		fatal_error("Problem with parameters");
 	if (!parse_colors(p))
 		fatal_error("Problem with F or C colors");
+	if (!check_tex(p))
+		fatal_error("Unable to load textures");
 	set_params(player, p);
 	size = check_char_map(p, fd);
 	if (size == 0)
