@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:41:44 by qlentz            #+#    #+#             */
-/*   Updated: 2023/04/01 00:04:01 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/02 22:59:24 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	map_parser(t_player *player, t_params *p)
 	if (!map_to_int(player, p))
 		return (0);
 	player->worldmap = player->worldmap;
-	if (!check_line(player) || !check_col(player))
+	if (!check_line(player) || !check_col(player) || !extra_map_check(player))
 		fatal_error("map not closed");
 	if (check_spawn(player) != 1)
 		fatal_error("Wrong spawns");

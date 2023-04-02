@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:08:48 by qlentz            #+#    #+#             */
-/*   Updated: 2023/04/02 21:59:56 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/02 22:04:28 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	raycast(t_player *player)
 		ray.draw.y = line_height / 2 + SCREENH / 2;
 		if (ray.draw.y >= SCREENH)
 			ray.draw.y = SCREENH - 1;
-		draw_wall(player, &ray, x, line_height);
+		draw_wall(player, &ray, x);
 		x++;
 	}
 }
