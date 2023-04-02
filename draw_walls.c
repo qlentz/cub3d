@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 18:14:59 by mpouce            #+#    #+#             */
-/*   Updated: 2023/03/31 23:44:53 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/02 22:00:18 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ void	draw_wall_line(t_player *player, t_ray *ray, int x, t_textpixel *tex)
 	}
 }
 
-void	draw_wall(t_player *player, t_ray *ray, int x, int line_height)
+void	draw_wall(t_player *player, t_ray *ray, int x)
 {
 	t_textpixel	tex;
 	double		wall_x;
-	int			i;
 
 	tex.offset = 0;
 	if (ray->side == 0)

@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:07:57 by qlentz            #+#    #+#             */
-/*   Updated: 2023/04/01 19:23:53 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/02 22:00:29 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ typedef struct s_ray {
 
 int			get_pixel_color(t_texture *tex, int x, int y);
 void		draw_wall_line(t_player *p, t_ray *ray, int x, t_textpixel *tex);
-void		draw_wall(t_player *player, t_ray *ray, int x, int line_height);
+void		draw_wall(t_player *player, t_ray *ray, int x);
 void		pixel_put(t_img *data, int x, int y, int color);
 int			encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 void		close_win(t_mlx *mlx);

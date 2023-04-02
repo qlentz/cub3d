@@ -1,8 +1,8 @@
 SO textures/eagle.xpm
 NO textures/side_2.xpm
 
-C 50,50,50
-F 0,0,0
+C 150,50,150
+F 0,153,51
 
 WE textures/wall_2.xpm
 EA textures/wall.xpm

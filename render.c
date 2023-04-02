@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:08:48 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/31 23:44:53 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/02 21:59:56 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,10 @@ void	raycast(t_player *player)
 	int		x;
 	t_ray	ray;
 	int		line_height;
-	int		offset;
 
 	x = 0;
 	while (x < SCREENW)
 	{
-		offset = 0;
 		ray = ray_init(x, player);
 		step(&ray, player);
 		dda(&ray, player);
