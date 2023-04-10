@@ -6,14 +6,14 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:07:57 by qlentz            #+#    #+#             */
-/*   Updated: 2023/04/10 12:55:44 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/10 13:34:15 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# define SCREENW	1000
-# define SCREENH	800
+# define SCREENW	1500
+# define SCREENH	1000
 # define K_ESC 		53
 # define K_UP		126
 # define K_W		13
