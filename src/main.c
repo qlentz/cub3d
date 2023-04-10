@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:12:56 by qlentz            #+#    #+#             */
-/*   Updated: 2023/04/01 19:23:52 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/10 12:55:03 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	main(int ac, char **av)
 	raycast(&player);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img->img, 0, 0);
 	mlx_hook(mlx.win, 2, (1L << 0), hook_keydown, &player);
+	mlx_hook(mlx.win, 17, 0, hook_cross, NULL);
 	mlx_loop(mlx.mlx);
 	return (0);
 }

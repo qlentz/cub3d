@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 13:07:57 by qlentz            #+#    #+#             */
-/*   Updated: 2023/04/02 23:21:38 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/10 12:55:44 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,5 +154,6 @@ void		fatal_error(char *str);
 int			end_cub(char *s);
 int			extra_map_check(t_player *p);
 int			check_tex(t_params *p);
+int			hook_cross(void *s);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: qlentz <qlentz@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:43:47 by qlentz            #+#    #+#             */
-/*   Updated: 2023/03/31 23:22:07 by qlentz           ###   ########.fr       */
+/*   Updated: 2023/04/10 12:57:27 by qlentz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,6 @@ int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
 	return (red << 16 | green << 8 | blue);
 }
 
-/*
-void	ver_line(t_mlx *mlx, int x, t_ivector coordinates, int color)
-{
-	while (coordinates.x < coordinates.y)
-	{
-		pixel_put(mlx->img, x, coordinates.x, color);
-		coordinates.x++;
-	}
-}
-*/
-
 void	reset(int sky, int floor, t_img *img)
 {
 	int	x;
@@ -56,4 +45,11 @@ void	reset(int sky, int floor, t_img *img)
 		while (++y < SCREENH)
 			pixel_put(img, x, y, floor);
 	}
+}
+
+int	hook_cross(void *s)
+{
+	(void)s;
+	exit(0);
+	return (0);
 }
